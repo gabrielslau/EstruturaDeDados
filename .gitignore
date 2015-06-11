@@ -89,6 +89,8 @@ local.properties
 # External tool builders
 .externalToolBuilders/
 
+RemoteSystemsTempFiles/
+
 # Locally stored "Eclipse launch configurations"
 *.launch
 
