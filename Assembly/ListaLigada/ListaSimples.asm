@@ -13,12 +13,21 @@ main:
     addi $v0, $0, 3
     jal PushHead
 
+    jal GetHead
+
     addi $v0, $0, 5
     jal PushHead
 
     addi $v0, $0, 20
     jal PushHead
 
+    jal GetSecond
+
+    addi $v0, $0, 30
+    jal PushTail
+
+    jal GetHead
+    jal GetTail
     jal GetSecond
 
     j Fim # interrompe o fluxo (fim do código)
@@ -35,7 +44,16 @@ PushHead:
     sw    $v0, -4($sp) # configura a posição anterior com o endereço do atual
     add   $sp, $sp, 8  # desloca 2 casas
     addi  $t0, $t0, 1  # contador
-    jr $ra
+    jr    $ra
+
+# Armazena no início da lista (aponta para o que estava no início)
+PushTail:
+    sw    $v0, -8($s7)
+    la    $v0, 0($s7)  # pega o endereço de $sp e salva em $v0
+    sw    $v0, -4($s7) # configura a posição anterior com o endereço do atual
+    add   $s7, $s7, -8  # desloca 2 casas
+    addi  $t0, $t0, 1  # contador
+    jr    $ra
 
 # retorna o segundo elemento da lista
 GetSecond:
@@ -44,9 +62,28 @@ GetSecond:
     lw    $v0, 0($t9)  # pega o conteúdo do elemento capturado
 
     # exibe o valor no log
-    move $a0, $v0
-    li $v0, 1
+    move  $a0, $v0
+    li    $v0, 1
     syscall
-    jr $ra
+    jr    $ra
+
+# retorna o elemendo no topo da lista (sem removê-lo)
+GetHead:
+    lw    $v0, -8($sp) # 0($sp) armazena o endereço do próximo elemento
+    # exibe o valor no log
+    move  $a0, $v0
+    li    $v0, 1
+    syscall
+    jr    $ra
+
+# retorna o elemendo no início da lista (sem removê-lo)
+GetTail:
+    lw    $v0, 0($s7)
+    # exibe o valor no log
+    move  $a0, $v0
+    li    $v0, 1
+    syscall
+    jr    $ra
+
 Fim:
     nop
