@@ -1,8 +1,12 @@
 package ifrn.tads.estruturadedados.binarytree;
 
 public interface IArvoreBinaria {
-    No pesquisar(No no, Object key);
-    No incluir(Object key);
-    Object remover(Object key);
-    void setRaiz(No p);
+    INo pesquisar(No no, Integer o);
+    INo pesquisar(Integer o);
+    No incluir(Integer o);
+    boolean remover(Integer o);
+    void setRaiz(No o);
+    // custom
+    void preOrderTraverseTree(INo focusNode);
+    void postOrderTraverseTree(INo focusNode);
 }

@@ -3,17 +3,27 @@ package ifrn.tads.estruturadedados.binarytree;
 import java.util.Iterator;
 
 public interface INo {
-    Object element();
+    Integer element();
 
     INo parent();
 
-    void setElement(Object o);
+    void setElement(Integer o);
 
-    void addChild(INo o);
+    //void addChild(INo o);
 
-    void removeChild(INo o);
+    //void removeChild(INo o);
 
     int childrenNumber();
 
     Iterator children();
+
+    INo leftChild();
+
+    void leftChild(INo no);
+
+    INo rightChild();
+
+    void rightChild(INo no);
+
+    boolean isLeaf();
 }
