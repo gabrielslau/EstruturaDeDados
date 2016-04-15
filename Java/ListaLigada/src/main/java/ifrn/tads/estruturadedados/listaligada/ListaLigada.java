@@ -65,6 +65,12 @@ class ListaLigada {
      * @return instância da própria lista
      */
     public ListaLigada juntar(ListaLigada lista) {
+        this.ultima.setProxima(lista.primeira);
+        this.ultima = lista.ultima;
+        lista.primeira = this.primeira;
+        this.totalDeElementos += lista.size();
+        lista.totalDeElementos = this.totalDeElementos;
+
         return this;
     }
 

@@ -49,4 +49,11 @@ public class AppTest extends TestCase {
             "[Capitão américa, Gavião Arqueiro, Falcão, Feiticeira Escarlate, Soldado Invernal, Homem formiga]"
         ));
     }
+
+    public void testJuntarDeveConterOConteudoDasDuasListas() {
+        assertTrue(teamCap.juntar(teamIron).toString().equals(
+            "[Capitão américa, Gavião Arqueiro, Falcão, Feiticeira Escarlate, Soldado Invernal, Homem formiga, " +
+            "Iron Man, Máquina de combate, Viúva negra, Visão, Pantera Negra, Spider Man]"
+        ));
+    }
 }
