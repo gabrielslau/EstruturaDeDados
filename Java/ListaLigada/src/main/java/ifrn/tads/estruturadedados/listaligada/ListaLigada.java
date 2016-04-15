@@ -55,6 +55,19 @@ class ListaLigada {
      * @return instância da própria lista
      */
     public ListaLigada deletar(int posicao) {
+        Celula atual = primeira;
+
+        // Percorrendo até o penúltimo elemento.
+        for (int i = 0; i <= this.totalDeElementos; i++) {
+            if (i + 1 == posicao) {
+                atual.setProxima( atual.getProxima().getProxima() );
+                this.totalDeElementos--;
+                return this;
+            }
+
+            atual = atual.getProxima();
+        }
+
         return this;
     }
 

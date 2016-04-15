@@ -56,4 +56,10 @@ public class AppTest extends TestCase {
             "Iron Man, Máquina de combate, Viúva negra, Visão, Pantera Negra, Spider Man]"
         ));
     }
+
+    public void testDeletarDeveRetornarListaSemElementoRemovido() {
+        assertTrue(teamCap.deletar(2).toString().equals(
+            "[Capitão américa, Gavião Arqueiro, Feiticeira Escarlate, Soldado Invernal, Homem formiga]"
+        ));
+    }
 }
