@@ -27,4 +27,8 @@ public class Celula {
     public String toString() {
         return elemento.toString();
     }
+
+    public boolean hasNext(){
+        return proxima != null;
+    }
 }

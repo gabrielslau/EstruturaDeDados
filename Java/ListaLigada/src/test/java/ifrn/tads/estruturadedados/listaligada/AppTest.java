@@ -62,4 +62,18 @@ public class AppTest extends TestCase {
             "[Capitão américa, Gavião Arqueiro, Feiticeira Escarlate, Soldado Invernal, Homem formiga]"
         ));
     }
+
+    public void testDividirDeveRetornarPrimeiraListaModificadaESegundaListaComConteudoDaDivisao(){
+        ListaLigada newTeam = new ListaLigada();
+
+        teamCap.dividir(2, newTeam);
+
+        assertTrue(teamCap.toString().equals(
+            "[Capitão américa, Gavião Arqueiro, Falcão]"
+        ));
+
+        assertTrue(newTeam.toString().equals(
+            "[Feiticeira Escarlate, Soldado Invernal, Homem formiga]"
+        ));
+    }
 }

@@ -15,6 +15,22 @@ class ListaLigada {
         return totalDeElementos;
     }
 
+    public void setTotalDeElementos(int totalDeElementos) {
+        this.totalDeElementos = totalDeElementos;
+    }
+
+    public ListaLigada setPrimeira(Celula primeira) {
+        this.primeira = primeira;
+
+        return this;
+    }
+
+    public ListaLigada setUltima(Celula ultima) {
+        this.ultima = ultima;
+
+        return this;
+    }
+
     /**
      * Insere um novo elemento no topo da lista
      *
@@ -60,7 +76,7 @@ class ListaLigada {
         // Percorrendo até o penúltimo elemento.
         for (int i = 0; i <= this.totalDeElementos; i++) {
             if (i + 1 == posicao) {
-                atual.setProxima( atual.getProxima().getProxima() );
+                atual.setProxima(atual.getProxima().getProxima());
                 this.totalDeElementos--;
                 return this;
             }
@@ -93,7 +109,25 @@ class ListaLigada {
      * @param posicao posição da lista à separar
      * @return instância da própria lista
      */
-    public ListaLigada dividir(int posicao) {
+    public ListaLigada dividir(int posicao, ListaLigada novaLista) {
+        Celula atual = primeira;
+
+        // Percorrendo até o penúltimo elemento.
+        for (int i = 0; i <= this.totalDeElementos; i++) {
+            if (i == posicao) {
+                novaLista.setPrimeira(atual.getProxima());
+                novaLista.setTotalDeElementos(totalDeElementos - (i + 1));
+
+                atual.setProxima(null);
+                this.ultima = atual;
+                this.totalDeElementos = i + 1;
+
+                return this;
+            }
+
+            atual = atual.getProxima();
+        }
+
         return this;
     }
 
