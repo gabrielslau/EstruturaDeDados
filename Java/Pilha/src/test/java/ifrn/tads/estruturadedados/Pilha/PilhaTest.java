@@ -62,4 +62,24 @@ public class PilhaTest extends TestCase {
         // permanece inalterado
         assertEquals("[5, 2, 4, 1, 3]", pilha.toString());
     }
+
+    public void testEmpty() {
+        assertTrue(pilha.isEmpty());
+
+        pilha.push(5);
+        pilha.push(2);
+        pilha.push(4);
+        pilha.push(1);
+        pilha.push(3);
+
+        assertFalse(pilha.isEmpty());
+
+        pilha.pop();
+        pilha.pop();
+        pilha.pop();
+        pilha.pop();
+        pilha.pop();
+
+        assertTrue(pilha.isEmpty());
+    }
 }

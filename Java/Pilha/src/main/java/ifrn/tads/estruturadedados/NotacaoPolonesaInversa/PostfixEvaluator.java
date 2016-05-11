@@ -1,12 +1,13 @@
 package ifrn.tads.estruturadedados.NotacaoPolonesaInversa;
 
+import ifrn.tads.estruturadedados.normal.Pilha;
+
 import java.util.Scanner;
-import java.util.Stack;
 
 class PostfixEvaluator {
     public int compute(String postfixExpr) {
         // Create a stack: all our operands are integers.
-        Stack<Integer> stack = new Stack<Integer>();
+        Pilha<Integer> stack = new Pilha<Integer>();
 
         // Use the Scanner class to help us extract numbers or operators:
         Scanner scanner = new Scanner(postfixExpr);
