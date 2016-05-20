@@ -1,4 +1,4 @@
-package deck;
+package ifrn.tads.estruturadedados.deck;
 
 public interface IDeck<T> {
 
