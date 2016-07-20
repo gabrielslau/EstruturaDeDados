@@ -186,4 +186,11 @@ public class BinarySearchTreeTest extends TestCase {
         assertEquals(expected, tree.elements());
         assertNull(tree.find(2).right);
     }
+
+    public void testGetOddNodes() {
+        tree.oddNodes(tree.root());
+        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 3, 5));
+
+        assertEquals(expected, tree.elements());
+    }
 }

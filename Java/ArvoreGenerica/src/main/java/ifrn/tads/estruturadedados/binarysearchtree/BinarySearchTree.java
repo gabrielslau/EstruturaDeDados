@@ -190,4 +190,16 @@ class BinarySearchTree<T extends Comparable<T>> {
 
         return true;
     }
+
+    public void oddNodes(Node<T> node) {
+        if (node == null) return;
+
+        oddNodes(node.left);
+
+        if ((Integer) node.data % 2 != 0) {
+            elements.add(node.data);
+        }
+
+        oddNodes(node.right);
+    }
 }
