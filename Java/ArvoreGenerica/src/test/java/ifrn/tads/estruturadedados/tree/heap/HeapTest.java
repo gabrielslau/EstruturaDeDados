@@ -34,4 +34,12 @@ public class HeapTest extends TestCase {
 
         assertEquals(expected, tree.nodes());
     }
+
+    public void testDeleteAndDisplay() {
+        // delete the element at index 2
+        tree.delete(2);
+        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 3, 5, 4, 6));
+
+        assertEquals(expected, tree.nodes());
+    }
 }

@@ -78,9 +78,30 @@ class Heap<T extends Comparable<T>> {
         downHeap(1);
     }
 
+    public void delete(int indexOfNodeToDelete) {
+        if (indexOfNodeToDelete > index)
+            return;
+
+        T lastNode = nodes.get(--index);
+
+        // swap the nodes
+        nodes.set(indexOfNodeToDelete, lastNode);
+        nodes.remove(index);
+
+        downHeap(indexOfNodeToDelete);
+    }
+
+    public int leftNodeIndex(int parentNodeIndex) {
+        return parentNodeIndex * 2;
+    }
+
+    public int rightNodeIndex(int parentNodeIndex) {
+        return leftNodeIndex(parentNodeIndex) + 1;
+    }
+
     public void downHeap(int currentIndex) {
-        int leftNodeIndex = currentIndex * 2;
-        int rightNodeIndex = leftNodeIndex + 1;
+        int leftNodeIndex = leftNodeIndex(currentIndex);
+        int rightNodeIndex = rightNodeIndex(currentIndex);
 
         if (leftNodeIndex > index || rightNodeIndex > index)
             return;
