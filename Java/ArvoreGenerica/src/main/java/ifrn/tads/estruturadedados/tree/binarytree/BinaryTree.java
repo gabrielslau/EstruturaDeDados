@@ -1,4 +1,4 @@
-package ifrn.tads.estruturadedados.binarytree;
+package ifrn.tads.estruturadedados.tree.binarytree;
 
 import java.util.ArrayList;
 

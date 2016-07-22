@@ -1,4 +1,4 @@
-package ifrn.tads.estruturadedados.binarysearchtree;
+package ifrn.tads.estruturadedados.tree.binarysearchtree;
 
 class Node<T extends Comparable<?>> {
     T data;
