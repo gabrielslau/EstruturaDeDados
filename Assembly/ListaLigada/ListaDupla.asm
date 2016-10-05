@@ -40,8 +40,8 @@ main:
     # Inicializa as entradas do menu
     addi $t1, $0, 1 #PushTail
     addi $t2, $0, 2 #PushHead
-    addi $t6, $0, 3 #ShowAll
-    addi $t7, $0, 4 #ShowAllReverse
+    addi $t3, $0, 3 #ShowAll
+    addi $t4, $0, 4 #ShowAllReverse
 
 escolha:
     li $v0, 4

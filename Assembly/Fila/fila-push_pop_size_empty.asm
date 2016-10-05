@@ -7,7 +7,7 @@
 .text
 main: 
 
-jal Fila # inicdiializa o endereço de memória da pilha
+jal Fila # inicializa o endereço de memória da pilha
 
 addi $a0, $zero, 3
 jal Push
@@ -15,13 +15,17 @@ jal Push
 addi $a0, $zero, 2
 jal Push
 
-# jal Pop # elimina o ultimo valor da pilha e exibe o valor
-
 addi $a0, $zero, 5
 jal Push
 
+addi $a0, $zero, 20
+jal PushFirst
+
 addi $a0, $zero, 10
 jal Push
+
+addi $a0, $zero, 8
+jal PushFirst
 
 jal Head
 
@@ -52,6 +56,13 @@ Push:
 	addi $s0, $s0, 1 # incrementa o contador
 	jr $ra
 
+# fura fila
+PushFirst: 	
+	subi $t9, $t9, 4 # avança a posição do ponteiro
+	sw   $a0, ($t9)
+	addi $s0, $s0, 1 # incrementa o contador
+	jr   $ra
+
 Pop: 
 	lw $v0, 0($t9)
 	addi $t9, $t9, 4
@@ -77,7 +88,7 @@ Size:
 isEmpty:
 	bgt $s0, $zero, PrintEmpty
 PrintEmpty :
-	addi $v0, $zero, $zero
+	add $v0, $zero, $zero
 	li $v0, 1
 	syscall
 	jr $ra

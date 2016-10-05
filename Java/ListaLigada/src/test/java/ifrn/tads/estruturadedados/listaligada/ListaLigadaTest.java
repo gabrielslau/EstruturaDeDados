@@ -63,6 +63,18 @@ public class ListaLigadaTest extends TestCase {
         ));
     }
 
+    public void testOrdenarDeveRetornarListaEmOrdemCrescente(){
+        assertTrue(teamCap.ordenar().toString().equals(
+            "[Capitão américa, Falcão, Feiticeira Escarlate, Gavião Arqueiro, Homem formiga, Soldado Invernal]"
+        ));
+    }
+
+    public void testOrdenar(){
+        assertTrue(
+            "a".compareTo("b") < 0
+        );
+    }
+
     public void testDividirDeveRetornarPrimeiraListaModificadaESegundaListaComConteudoDaDivisao(){
         ListaLigada newTeam = new ListaLigada();
 
