@@ -1,70 +1,22 @@
 package ifrn.tads.estruturadedados.tree.binarysearchtree;
 
-import java.util.ArrayList;
+import ifrn.tads.estruturadedados.tree.AbstractBinarySearchTree;
+import ifrn.tads.estruturadedados.tree.AbstractNode;
+
 import java.util.List;
 
-class BinarySearchTree<T extends Comparable<T>> {
-
-    private Node<T> root;
-    private ArrayList<T> elements;
-
-    public BinarySearchTree() {
-        this.root = null;
-        elements = new ArrayList<T>();
-    }
+public class BinarySearchTree<T extends Comparable<T>> extends AbstractBinarySearchTree<T> {
 
     public BinarySearchTree(List<T> elementsToAdd) {
-        this();
-
-        for (T element : elementsToAdd) {
-            insert(element);
-        }
-    }
-
-    public ArrayList<T> elements() {
-        return elements;
-    }
-
-    public Node<T> root() {
-        return root;
+        super(elementsToAdd);
     }
 
     public Node<T> find(T targetData) {
-        Node<T> current = root;
-
-        while (current != null) {
-            int comparator = current.data.compareTo(targetData);
-
-            if (comparator == 0) {
-                return current;
-            } else if (comparator > 0) {
-                current = current.left;
-            } else {
-                current = current.right;
-            }
-        }
-
-        return null;
+        return (Node<T>) super.find(targetData);
     }
 
-    /**
-     * @param nodeToDelete node to delete
-     * @return the smallest node of the right child of the node which is about to be deleted
-     */
-    public Node<T> findSuccessor(Node<T> nodeToDelete) {
-        Node<T> successor = null;
-        Node<T> current = nodeToDelete.right;
-
-        while (current != null) {
-            successor = current;
-            current = current.left;
-        }
-
-        return successor;
-    }
-
-    public void insert(T data) {
-        root = insert(root, data);
+    protected AbstractNode<T> insert(AbstractNode<T> nodeTarget, T data) {
+        return insert((Node<T>) nodeTarget, data);
     }
 
     protected Node<T> insert(Node<T> nodeTarget, T data) {
@@ -91,32 +43,8 @@ class BinarySearchTree<T extends Comparable<T>> {
         return nodeTarget;
     }
 
-    public void displayPreOrder(Node<T> root) {
-        if (root == null) return;
-
-        elements.add(root.data);
-        displayPreOrder(root.left);
-        displayPreOrder(root.right);
-    }
-
-    public void displayPostOrder(Node<T> root) {
-        if (root == null) return;
-
-        displayPostOrder(root.left);
-        displayPostOrder(root.right);
-        elements.add(root.data);
-    }
-
-    public void displayInOrder(Node<T> root) {
-        if (root == null) return;
-
-        displayInOrder(root.left);
-        elements.add(root.data);
-        displayInOrder(root.right);
-    }
-
     public boolean delete(T data) {
-        Node<T> node = find(data);
+        AbstractNode<T> node = find(data);
 
         if (node == null) return false;
 
@@ -154,7 +82,7 @@ class BinarySearchTree<T extends Comparable<T>> {
 
         // Case 3: if node to be deleted has two childrens
         else {
-            Node<T> nodeSuccessor = findSuccessor(node);
+            AbstractNode<T> nodeSuccessor = findSuccessor(node);
 
             if (node == root) {
                 root = nodeSuccessor;
@@ -189,17 +117,5 @@ class BinarySearchTree<T extends Comparable<T>> {
         }
 
         return true;
-    }
-
-    public void oddNodes(Node<T> node) {
-        if (node == null) return;
-
-        oddNodes(node.left);
-
-        if ((Integer) node.data % 2 != 0) {
-            elements.add(node.data);
-        }
-
-        oddNodes(node.right);
     }
 }

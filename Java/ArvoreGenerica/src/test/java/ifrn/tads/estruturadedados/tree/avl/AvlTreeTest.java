@@ -1,5 +1,6 @@
 package ifrn.tads.estruturadedados.tree.avl;
 
+import ifrn.tads.estruturadedados.tree.AbstractBTreePrinter;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class AvlTreeTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
 
-        BTreePrinter.printNode(tree.root());
+        AbstractBTreePrinter.printNode((Node<?>) tree.root());
 
         tree = null;
     }
