@@ -7,6 +7,10 @@ import java.util.List;
 
 class AvlTree<T extends Comparable<T>> extends BinarySearchTree<T> {
 
+    public AvlTree() {
+        super();
+    }
+
     public AvlTree(List<T> elementsToAdd) {
         super(elementsToAdd);
     }
