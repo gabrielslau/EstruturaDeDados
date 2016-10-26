@@ -13,12 +13,14 @@ public abstract class AbstractBinarySearchTree<T extends Comparable<T>> {
         elements = new ArrayList<T>();
     }
 
+    /**
+     * @param elementsToAdd elements to add in the tree
+     * @deprecated use the insert(List<T> elementsToAdd) method directly
+     */
     public AbstractBinarySearchTree(List<T> elementsToAdd) {
         this();
 
-        for (T element : elementsToAdd) {
-            insert(element);
-        }
+        insert(elementsToAdd);
     }
 
     public ArrayList<T> elements() {
@@ -65,6 +67,12 @@ public abstract class AbstractBinarySearchTree<T extends Comparable<T>> {
 
     public void insert(T data) {
         root = insert(root, data);
+    }
+
+    public void insert(List<T> elementsToAdd) {
+        for (T element : elementsToAdd) {
+            insert(element);
+        }
     }
 
     protected abstract AbstractNode<T> insert(AbstractNode<T> nodeTarget, T data);

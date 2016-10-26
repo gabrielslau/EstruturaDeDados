@@ -7,6 +7,10 @@ import java.util.List;
 
 public class BinarySearchTree<T extends Comparable<T>> extends AbstractBinarySearchTree<T> {
 
+    public BinarySearchTree() {
+        super();
+    }
+
     public BinarySearchTree(List<T> elementsToAdd) {
         super(elementsToAdd);
     }
@@ -15,11 +19,11 @@ public class BinarySearchTree<T extends Comparable<T>> extends AbstractBinarySea
         return (Node<T>) super.find(targetData);
     }
 
-    protected AbstractNode<T> insert(AbstractNode<T> nodeTarget, T data) {
+    public AbstractNode<T> insert(AbstractNode<T> nodeTarget, T data) {
         return insert((Node<T>) nodeTarget, data);
     }
 
-    protected Node<T> insert(Node<T> nodeTarget, T data) {
+    public Node<T> insert(Node<T> nodeTarget, T data) {
         if (nodeTarget == null) {
             return new Node<T>(data);
         }
