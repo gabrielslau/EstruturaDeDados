@@ -23,5 +23,12 @@
         <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+
+      <dependency>
+          <groupId>org.fusesource.jansi</groupId>
+          <artifactId>jansi</artifactId>
+          <version>1.14</version>
+      </dependency>
+
   </dependencies>
 </project>
