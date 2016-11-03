@@ -1,6 +1,7 @@
 package ifrn.tads.estruturadedados.tree.binarysearchtree;
 
 import ifrn.tads.estruturadedados.tree.AbstractBTreePrinter;
+import ifrn.tads.estruturadedados.tree.INode;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class BinarySearchTreeTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
 
-        AbstractBTreePrinter.printNode((Node<?>) tree.root());
+        AbstractBTreePrinter.printNode(tree.root());
 
         tree = null;
     }
@@ -60,13 +61,13 @@ public class BinarySearchTreeTest extends TestCase {
 
     public void testFindMustReturnNodeWithSameData() {
         Integer expected = 4;
-        Node<Integer> result = tree.find(expected);
+        INode<Integer> result = tree.find(expected);
 
-        assertEquals(expected, result.data);
+        assertEquals(expected, result.data());
     }
 
     public void testFindMustReturnNull() {
-        Node<Integer> result = tree.find(9000);
+        INode<Integer> result = tree.find(9000);
         assertEquals(null, result);
     }
 
@@ -75,12 +76,12 @@ public class BinarySearchTreeTest extends TestCase {
         Integer expected2 = 2;
         Integer expected6 = 6;
 
-        assertNull(tree.find(4).parent);
-        assertEquals(expected4, tree.find(2).parent.data);
-        assertEquals(expected4, tree.find(6).parent.data);
-        assertEquals(expected2, tree.find(1).parent.data);
-        assertEquals(expected2, tree.find(3).parent.data);
-        assertEquals(expected6, tree.find(5).parent.data);
+        assertNull(tree.find(4).parent());
+        assertEquals(expected4, tree.find(2).parent().data());
+        assertEquals(expected4, tree.find(6).parent().data());
+        assertEquals(expected2, tree.find(1).parent().data());
+        assertEquals(expected2, tree.find(3).parent().data());
+        assertEquals(expected6, tree.find(5).parent().data());
     }
 
     public void testDeleteRootWithNoChildren() {
@@ -175,7 +176,7 @@ public class BinarySearchTreeTest extends TestCase {
         ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(2, 3, 4, 5, 6));
 
         assertEquals(expected, tree.elements());
-        assertNull(tree.find(2).left);
+        assertNull(tree.find(2).left());
     }
 
     public void testDeleteRightLeafNode() {
@@ -185,7 +186,7 @@ public class BinarySearchTreeTest extends TestCase {
         ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 5, 6));
 
         assertEquals(expected, tree.elements());
-        assertNull(tree.find(2).right);
+        assertNull(tree.find(2).right());
     }
 
     public void testGetOddNodes() {
