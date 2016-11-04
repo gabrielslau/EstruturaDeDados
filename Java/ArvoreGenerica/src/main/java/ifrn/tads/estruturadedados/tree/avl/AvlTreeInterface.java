@@ -1,28 +1,24 @@
 package ifrn.tads.estruturadedados.tree.avl;
 
-import ifrn.tads.estruturadedados.tree.AbstractNode;
-
 import java.util.List;
 
 interface AvlTreeInterface<T extends Comparable<T>> {
 
-    public int getBalanceFactor(Node<T> n);
+    int getBalanceFactor(AvlNode<T> n);
 
-    public int getHeight(Node<T> node);
+    int getHeight(AvlNode<T> node);
 
-    public Node<T> tryToRotate(Node<T> nodeTarget, T data);
+    AvlNode<T> rotate(AvlNode<T> nodeTarget, T data);
 
-    public Node<T> rightRotate(Node<T> nodeTarget);
+    AvlNode<T> rightRotate(AvlNode<T> nodeTarget);
 
-    public Node<T> leftRotate(Node<T> nodeTarget);
+    AvlNode<T> leftRotate(AvlNode<T> nodeTarget);
 
-    public AbstractNode<T> insert(AbstractNode<T> nodeTarget, T data);
+    void insert(List<T> elementsToAdd);
 
-    public void insert(List<T> elementsToAdd);
+    AvlNode<T> insert(AvlNode<T> nodeTarget, T data);
 
-    public Node<T> insert(Node<T> nodeTarget, T data);
+    AvlNode<T> find(T targetData);
 
-    public Node<T> find(T targetData);
-
-    public boolean delete(T data);
+    boolean delete(T data);
 }

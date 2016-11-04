@@ -1,6 +1,5 @@
 package ifrn.tads.estruturadedados.tree.avl;
 
-import ifrn.tads.estruturadedados.tree.AbstractBTreePrinter;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class AvlTreeTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
 
-        AbstractBTreePrinter.printNode(tree.root());
+        AvlTreePrinter.printNode(tree.root());
 
         tree = null;
     }
@@ -35,7 +34,7 @@ public class AvlTreeTest extends TestCase {
     }
 
     public void testRoot() {
-        Node<Integer> expected;
+        AvlNode<Integer> expected;
         tree.insert(Arrays.asList(4, 2, 1));
 
         expected = tree.find(2);
@@ -47,10 +46,12 @@ public class AvlTreeTest extends TestCase {
     }
 
     public void testFindMustReturnNodeWithSameData() {
-        Integer expected = 4;
-        Node<Integer> result = tree.find(expected);
+        tree.insert(Arrays.asList(4, 2, 1, 5, 6));
 
-        assertEquals(expected, result.data);
+        Integer expected = 4;
+        AvlNode<Integer> result = tree.find(expected);
+
+        assertEquals(expected, result.data());
     }
 
     public void testHeights() {
@@ -74,69 +75,69 @@ public class AvlTreeTest extends TestCase {
     }
 
     public void testSimpleLeftRotation() {
-        Node<Integer> root;
+        AvlNode<Integer> root;
         tree.insert(Arrays.asList(6, 8));
 
-        root = ((Node<Integer>) tree.root());
-        assertEquals(new Integer(6), root.data);
+        root = tree.root();
+        assertEquals(new Integer(6), root.data());
 
         tree.insert(9);
 
         // Test the rotation
-        root = ((Node<Integer>) tree.root());
-        assertEquals(new Integer(8), root.data);
-        assertEquals(new Integer(6), root.left.data);
-        assertEquals(new Integer(9), root.right.data);
+        root = tree.root();
+        assertEquals(new Integer(8), root.data());
+        assertEquals(new Integer(6), root.left().data());
+        assertEquals(new Integer(9), root.right().data());
     }
 
     public void testSimpleRightRotation() {
-        Node<Integer> root;
+        AvlNode<Integer> root;
         tree.insert(Arrays.asList(10, 9));
 
-        root = ((Node<Integer>) tree.root());
-        assertEquals(new Integer(10), root.data);
-        assertEquals(new Integer(9), root.left.data);
+        root = tree.root();
+        assertEquals(new Integer(10), root.data());
+        assertEquals(new Integer(9), root.left().data());
 
         tree.insert(8);
 
         // Test the rotation
-        root = ((Node<Integer>) tree.root());
-        assertEquals(new Integer(9), root.data);
-        assertEquals(new Integer(8), root.left.data);
-        assertEquals(new Integer(10), root.right.data);
+        root = tree.root();
+        assertEquals(new Integer(9), root.data());
+        assertEquals(new Integer(8), root.left().data());
+        assertEquals(new Integer(10), root.right().data());
     }
 
     public void testDoubleLeftRotation() {
-        Node<Integer> root;
+        AvlNode<Integer> root;
         tree.insert(Arrays.asList(8, 94));
 
-        root = ((Node<Integer>) tree.root());
-        assertEquals(new Integer(8), root.data);
-        assertEquals(new Integer(94), root.right.data);
+        root = tree.root();
+        assertEquals(new Integer(8), root.data());
+        assertEquals(new Integer(94), root.right().data());
 
         tree.insert(31);
 
         // Test the rotation
-        root = ((Node<Integer>) tree.root());
-        assertEquals(new Integer(31), root.data);
-        assertEquals(new Integer(8), root.left.data);
-        assertEquals(new Integer(94), root.right.data);
+        root = tree.root();
+        assertEquals(new Integer(31), root.data());
+        assertEquals(new Integer(8), root.left().data());
+        assertEquals(new Integer(94), root.right().data());
     }
 
     public void testDoubleRightRotation() {
-        Node<Integer> root;
+        AvlNode<Integer> root;
         tree.insert(Arrays.asList(10, 5));
 
-        root = ((Node<Integer>) tree.root());
-        assertEquals(new Integer(10), root.data);
-        assertEquals(new Integer(5), root.left.data);
+        root = tree.root();
+        assertEquals(new Integer(10), root.data());
+        assertEquals(new Integer(5), root.left().data());
 
         tree.insert(8);
 
         // Test the rotation
-        root = ((Node<Integer>) tree.root());
-        assertEquals(new Integer(8), root.data);
-        assertEquals(new Integer(5), root.left.data);
-        assertEquals(new Integer(10), root.right.data);
+        root = tree.root();
+        assertEquals(new Integer(8), root.data());
+        assertEquals(new Integer(5), root.left().data());
+        assertEquals(new Integer(10), root.right().data());
     }
 }
