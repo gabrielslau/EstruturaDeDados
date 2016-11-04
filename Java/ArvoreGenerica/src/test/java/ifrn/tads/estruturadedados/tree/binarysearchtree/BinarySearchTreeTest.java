@@ -1,6 +1,5 @@
 package ifrn.tads.estruturadedados.tree.binarysearchtree;
 
-import ifrn.tads.estruturadedados.tree.AbstractBTreePrinter;
 import ifrn.tads.estruturadedados.tree.INode;
 import junit.framework.TestCase;
 
@@ -33,7 +32,7 @@ public class BinarySearchTreeTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
 
-        AbstractBTreePrinter.printNode(tree.root());
+        BinarySearchTreePrinter.printNode(tree.root());
 
         tree = null;
     }
