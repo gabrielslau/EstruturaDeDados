@@ -13,25 +13,13 @@ public class Aresta implements InterfaceArestas {
         direcionada = false;
     }
 
-    public Aresta(Vertice verticeOrigem, Vertice verticeDestino,
-                  double valor) {
-        super();
-        this.verticeOrigem = verticeOrigem;
-        this.verticeDestino = verticeDestino;
+    public Aresta(Vertice verticeOrigem, Vertice verticeDestino, double valor) {
+        this(verticeOrigem, verticeDestino);
         this.valor = valor;
-        direcionada = false;
     }
 
-    /**
-     * @param valor
-     * @param direcionada
-     */
-    public Aresta(Vertice verticeOrigem, Vertice verticeDestino,
-                  double valor, boolean direcionada) {
-        super();
-        this.verticeOrigem = verticeOrigem;
-        this.verticeDestino = verticeDestino;
-        this.valor = valor;
+    public Aresta(Vertice verticeOrigem, Vertice verticeDestino, double valor, boolean direcionada) {
+        this(verticeOrigem, verticeDestino, valor);
         this.direcionada = direcionada;
     }
 

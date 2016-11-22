@@ -7,7 +7,7 @@ public interface InterfaceGrafosSimples {
     //private Vector vertices;
     //private Aresta matrizAdj[][];
     //public GrafoSimples()
-    void inserirVertice(Vertice Vertice);
+    Vertice inserirVertice(Vertice Vertice);
 
     void removerVertice(Vertice Vertice);
 
