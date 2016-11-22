@@ -3,6 +3,7 @@ package ifrn.tads.estruturadedados.graph;
 import junit.framework.TestCase;
 
 import java.util.Arrays;
+import java.util.Vector;
 
 public class GrafoSimplesTest extends TestCase {
 
@@ -40,5 +41,23 @@ public class GrafoSimplesTest extends TestCase {
 
         assertEquals(verticeA, edge.getVerticeOrigem());
         assertEquals(verticeB, edge.getVerticeDestino());
+    }
+
+    public void testIncidentEdges() {
+        Vertice verticeA = graph.inserirVertice(1);
+        Vertice verticeB = graph.inserirVertice(2);
+        Vertice verticeC = graph.inserirVertice(3);
+        Vertice verticeD = graph.inserirVertice(4);
+
+        Aresta edgeAB = graph.insereAresta(verticeA, verticeB, 10);
+        Aresta edgeBC = graph.insereAresta(verticeB, verticeC, 20);
+        Aresta edgeCD = graph.insereAresta(verticeC, verticeD, 30);
+        Aresta edgeDA = graph.insereAresta(verticeD, verticeA, 40);
+        Aresta edgeDB = graph.insereAresta(verticeD, verticeB, 50);
+
+        Vector edges = graph.arestasIncidentes(verticeB);
+        Vector expected = new Vector<Aresta>(Arrays.asList(edgeAB, edgeBC, edgeDB));
+
+        assertEquals(expected, edges);
     }
 }

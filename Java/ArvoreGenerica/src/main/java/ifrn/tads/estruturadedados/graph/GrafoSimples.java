@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class GrafoSimples implements InterfaceGrafosSimples {
     private final int ADJACENCY_MATRIX_SIZE = 10;
-    private int qtdVertices;
+    //private int qtdVertices;
     private Vector<Vertice> vertices;
     private Aresta adjacencyMatrix[][];
 
@@ -15,7 +15,6 @@ public class GrafoSimples implements InterfaceGrafosSimples {
     }
 
     public GrafoSimples(int adjacency_matrix_size) {
-        qtdVertices = 0;
         vertices = new Vector<Vertice>();
         adjacencyMatrix = new Aresta[adjacency_matrix_size][adjacency_matrix_size];
     }
@@ -44,9 +43,12 @@ public class GrafoSimples implements InterfaceGrafosSimples {
     }
 
     public void removerVertice(Vertice vertice) {
-        qtdVertices--;
+        //qtdVertices--;
         int indice = achaIndice(vertice.getChave());
         vertices.remove(indice);  // remove o vertice do vector
+
+        int qtdVertices = getQtdVertices();
+
         // remove linhas e colunas da matriz de adjacencia
         Aresta tempMatrizAdj[][] = new Aresta[qtdVertices][qtdVertices];
         int ff = 0, gg;
@@ -133,8 +135,8 @@ public class GrafoSimples implements InterfaceGrafosSimples {
     }
 
     public void mostraMatriz() {
-        for (int f = 0; f < qtdVertices; f++) {
-            for (int g = 0; g < qtdVertices; g++) {
+        for (int f = 0; f < getQtdVertices(); f++) {
+            for (int g = 0; g < getQtdVertices(); g++) {
                 System.out.print(adjacencyMatrix[f][g] + " ");
             }
 
@@ -148,7 +150,11 @@ public class GrafoSimples implements InterfaceGrafosSimples {
     }
 
     public int ordem() {
-        return qtdVertices;
+        return getQtdVertices();
+    }
+
+    public int getQtdVertices() {
+        return vertices().size();
     }
 
     private int achaIndice(int chave) {
@@ -172,8 +178,8 @@ public class GrafoSimples implements InterfaceGrafosSimples {
 
     public Vector arestas() {
         Vector v = new Vector();
-        for (int l = 0; l < qtdVertices; l++) {
-            for (int c = 0; c < qtdVertices; c++) {
+        for (int l = 0; l < getQtdVertices(); l++) {
+            for (int c = 0; c < getQtdVertices(); c++) {
                 v.add(adjacencyMatrix[l][c]);
             }
         }
@@ -181,9 +187,28 @@ public class GrafoSimples implements InterfaceGrafosSimples {
         return v;
     }
 
+    /**
+     * @param vertice vertice em que as arestas incidem
+     * @return Vector lista de arestas encontradas
+     * @exercicio
+     */
     public Vector arestasIncidentes(Vertice vertice) {
-        // exercicio, fique a vontade para implementa-lo coleguinha
-        return null;
+        Vector<Aresta> edges = new Vector<Aresta>();
+        int vertexIndex = achaIndice(vertice.getChave());
+
+        for (int f = 0; f < getQtdVertices(); f++) {
+            for (int g = 0; g < getQtdVertices(); g++) {
+                if (
+                        (f == vertexIndex || g == vertexIndex) &&
+                                adjacencyMatrix[f][g] != null &&
+                                !edges.contains(adjacencyMatrix[f][g])
+                        ) {
+                    edges.add(adjacencyMatrix[f][g]);
+                }
+            }
+        }
+
+        return edges;
     }
 
     public Vector finalVertices(Aresta a) {
