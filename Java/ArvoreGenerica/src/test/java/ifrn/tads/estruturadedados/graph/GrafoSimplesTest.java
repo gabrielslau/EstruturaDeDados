@@ -78,4 +78,17 @@ public class GrafoSimplesTest extends TestCase {
 
         assertEquals(expected, degree);
     }
+
+    public void testAdjacentVertex() {
+        Vertice verticeA = graph.inserirVertice(1);
+        Vertice verticeB = graph.inserirVertice(2);
+        Vertice verticeC = graph.inserirVertice(3);
+
+        graph.insereAresta(verticeA, verticeB);
+        graph.insereAresta(verticeA, verticeC);
+
+        assertTrue(graph.adjacente(verticeA, verticeB));
+        assertTrue(graph.adjacente(verticeA, verticeC));
+        assertFalse(graph.adjacente(verticeB, verticeC));
+    }
 }
