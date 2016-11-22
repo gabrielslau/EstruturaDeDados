@@ -60,4 +60,22 @@ public class GrafoSimplesTest extends TestCase {
 
         assertEquals(expected, edges);
     }
+
+    public void testVertexDegree() {
+        Vertice verticeA = graph.inserirVertice(1);
+        Vertice verticeB = graph.inserirVertice(2);
+        Vertice verticeC = graph.inserirVertice(3);
+        Vertice verticeD = graph.inserirVertice(4);
+
+        graph.insereAresta(verticeA, verticeB);
+        graph.insereAresta(verticeB, verticeC);
+        graph.insereAresta(verticeC, verticeD);
+        graph.insereAresta(verticeD, verticeA);
+        graph.insereAresta(verticeD, verticeB);
+
+        int degree = graph.grau(verticeB);
+        int expected = 3;
+
+        assertEquals(expected, degree);
+    }
 }

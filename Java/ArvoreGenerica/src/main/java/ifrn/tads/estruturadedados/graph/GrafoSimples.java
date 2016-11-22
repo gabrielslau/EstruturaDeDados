@@ -144,9 +144,13 @@ public class GrafoSimples implements InterfaceGrafosSimples {
         }
     }
 
+    /**
+     * @param vertice vertice do grafo para medir o grau
+     * @return quantidade de arestas incidentes no vertice
+     * @exercicio
+     */
     public int grau(Vertice vertice) {
-        // exercicio, fique a vontade para implementa-lo coleguinha
-        return 0;
+        return arestasIncidentes(vertice).size();
     }
 
     public int ordem() {
