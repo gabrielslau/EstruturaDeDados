@@ -1,20 +1,38 @@
 package ifrn.tads.estruturadedados.graph;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 public class GrafoSimples implements InterfaceGrafosSimples {
     private int qtdVertices;
-    private Vector vertices;
+    private Vector<Vertice> vertices;
     private Aresta matrizAdj[][];
 
     public GrafoSimples() {
         qtdVertices = 0;
-        vertices = new Vector();
+        vertices = new Vector<Vertice>();
     }
 
+    public void inserirVertice(List<Double> valores) {
+        for (double valor : valores) {
+            inserirVertice(valor);
+        }
+    }
+
+    public void inserirVertice(double valor) {
+        int chave = vertices.size() + 1;
+        inserirVertice(new Vertice(chave, valor));
+    }
+
+    /**
+     * Insere e retorna um novo vértice armazenando o elemento
+     *
+     * @param vertice
+     * @exercicio
+     */
     public void inserirVertice(Vertice vertice) {
-        // exercicio, fique a vontade para implementa-lo coleguinha
+        vertices.add(vertice);
     }
 
     public void removerVertice(Vertice vertice) {
