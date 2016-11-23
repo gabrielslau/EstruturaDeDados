@@ -94,9 +94,9 @@ public class GrafoSimples implements InterfaceGrafosSimples {
         return insereAresta(verticeUm, verticeDois, 0);
     }
 
-    public void removeAresta(Aresta Aresta) {
-        int ind1 = achaIndice(Aresta.getVerticeOrigem().getChave());
-        int ind2 = achaIndice(Aresta.getVerticeDestino().getChave());
+    public void removeAresta(Aresta aresta) {
+        int ind1 = achaIndice(aresta.getVerticeOrigem().getChave());
+        int ind2 = achaIndice(aresta.getVerticeDestino().getChave());
 
         // grafo nao orientado
         adjacencyMatrix[ind1][ind2] = adjacencyMatrix[ind2][ind1] = null;
@@ -124,8 +124,12 @@ public class GrafoSimples implements InterfaceGrafosSimples {
      * @param aresta
      * @exercicio
      */
-    public void removeArco(Aresta aresta) {   // grafo orientado
-        // exercicio, fique a vontade para implementa-lo coleguinha
+    public void removeArco(Aresta aresta) {
+        int ind1 = achaIndice(aresta.getVerticeOrigem().getChave());
+        int ind2 = achaIndice(aresta.getVerticeDestino().getChave());
+
+        // grafo orientado
+        adjacencyMatrix[ind1][ind2] = null;
     }
 
     public void mostraVertices() {

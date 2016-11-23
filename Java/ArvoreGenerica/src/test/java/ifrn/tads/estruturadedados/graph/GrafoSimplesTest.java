@@ -118,4 +118,23 @@ public class GrafoSimplesTest {
         exception.expect(OpostoError.class);
         graph.oposto(verticeB, edgeAC);
     }
+
+    @Test
+    public void testRemoveEdge() {
+        Vertice verticeA = graph.inserirVertice(1);
+        Vertice verticeB = graph.inserirVertice(2);
+        Vertice verticeC = graph.inserirVertice(3);
+
+        Aresta edgeAB = graph.insereAresta(verticeA, verticeB, 10);
+        Aresta edgeAC = graph.insereAresta(verticeA, verticeC, 20);
+        Aresta edgeBC = graph.insereAresta(verticeB, verticeC, 30);
+
+        // the edge must exist in the matrix
+        assertEquals(edgeAC, graph.getAresta(verticeA, verticeC));
+
+        graph.removeAresta(edgeAC);
+
+        // after been removed, the edge should not be found in the matrix
+        assertNull(graph.getAresta(verticeA, verticeC));
+    }
 }
