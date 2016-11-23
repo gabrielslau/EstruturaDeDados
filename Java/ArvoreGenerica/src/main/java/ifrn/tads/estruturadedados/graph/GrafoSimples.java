@@ -223,9 +223,22 @@ public class GrafoSimples implements InterfaceGrafosSimples {
         return v;
     }
 
+    /**
+     * @param v vertice de referência
+     * @param a aresta de referência
+     * @return o vertice o posto ao vértice v na aresta a
+     * @throws OpostoError Um erro ocorre se Aresta não é incidente a Vertice
+     * @exercicio
+     */
     public Vertice oposto(Vertice v, Aresta a) throws OpostoError {
-        // exercicio, fique a vontade para implementa-lo coleguinha
-        return null;
+        Vector finalVertex = finalVertices(a);
+        if (!finalVertex.contains(v)) {
+            throw new OpostoError();
+        }
+
+        finalVertex.remove(v);
+
+        return (Vertice) finalVertex.firstElement();
     }
 
     public boolean adjacente(Vertice v, Vertice w) {

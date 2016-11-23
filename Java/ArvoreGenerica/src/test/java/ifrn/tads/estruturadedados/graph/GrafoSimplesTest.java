@@ -1,38 +1,46 @@
 package ifrn.tads.estruturadedados.graph;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 import java.util.Vector;
 
-public class GrafoSimplesTest extends TestCase {
+import static org.junit.Assert.*;
+
+public class GrafoSimplesTest {
 
     private GrafoSimples graph;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
+    @Before
+    public void setUp() throws Exception {
         graph = new GrafoSimples();
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-
+    @After
+    public void tearDown() throws Exception {
         graph = null;
     }
 
+    @Test
     public void testNewEmptyGraph() {
         assertEquals(0, graph.vertices().size());
     }
 
+    @Test
     public void testInsertVertexes() {
         graph.inserirVertice(Arrays.asList(1.0, 3.0, 5.0, 6.0, 10.0));
 
         assertEquals(5, graph.vertices().size());
     }
 
+    @Test
     public void testInsertEdge() {
         Vertice verticeA = graph.inserirVertice(1.0);
         Vertice verticeB = graph.inserirVertice(2.0);
@@ -43,6 +51,7 @@ public class GrafoSimplesTest extends TestCase {
         assertEquals(verticeB, edge.getVerticeDestino());
     }
 
+    @Test
     public void testIncidentEdges() {
         Vertice verticeA = graph.inserirVertice(1);
         Vertice verticeB = graph.inserirVertice(2);
@@ -61,6 +70,7 @@ public class GrafoSimplesTest extends TestCase {
         assertEquals(expected, edges);
     }
 
+    @Test
     public void testVertexDegree() {
         Vertice verticeA = graph.inserirVertice(1);
         Vertice verticeB = graph.inserirVertice(2);
@@ -79,6 +89,7 @@ public class GrafoSimplesTest extends TestCase {
         assertEquals(expected, degree);
     }
 
+    @Test
     public void testAdjacentVertex() {
         Vertice verticeA = graph.inserirVertice(1);
         Vertice verticeB = graph.inserirVertice(2);
@@ -90,5 +101,21 @@ public class GrafoSimplesTest extends TestCase {
         assertTrue(graph.adjacente(verticeA, verticeB));
         assertTrue(graph.adjacente(verticeA, verticeC));
         assertFalse(graph.adjacente(verticeB, verticeC));
+    }
+
+    @Test
+    public void testOppositeVertex() throws OpostoError {
+        Vertice verticeA = graph.inserirVertice(1);
+        Vertice verticeB = graph.inserirVertice(2);
+        Vertice verticeC = graph.inserirVertice(3);
+
+        Aresta edgeAB = graph.insereAresta(verticeA, verticeB, 10);
+        Aresta edgeAC = graph.insereAresta(verticeA, verticeC, 20);
+
+        assertEquals(verticeB, graph.oposto(verticeA, edgeAB));
+
+        // this will throw the exception
+        exception.expect(OpostoError.class);
+        graph.oposto(verticeB, edgeAC);
     }
 }
