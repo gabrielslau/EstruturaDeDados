@@ -23,7 +23,7 @@ public class BTreeTest {
 
     @Test
     public void testInsertAndFind() {
-        tree.insert(Arrays.asList(10, 30, 61, 80, 141, 322, 363, 393, 409, 439, 71, 166, 188, 377, 179, 20, 43, 52));
+        tree.add(Arrays.asList(10, 30, 61, 80, 141, 322, 363, 393, 409, 439, 71, 166, 188, 377, 179, 20, 43, 52));
 
         assertNotNull(tree.find(80));
     }

@@ -16,21 +16,21 @@ public class BTree<T extends Comparable<T>> implements BTreeInterface<T> {
         return root;
     }
 
-    public void insert(List<T> elementsToAdd) {
-        for (T element : elementsToAdd) {
-            insert(element);
+    public void add(List<T> keys) {
+        for (T key : keys) {
+            add(key);
         }
     }
 
-    public BTreeNode<T> insert(T targetData) {
+    public BTreeNode<T> add(T key) {
         return null;
     }
 
-    public BTreeNode<T> find(T targetData) {
+    public BTreeNode<T> find(T key) {
         return null;
     }
 
-    public boolean delete(T data) {
+    public boolean remove(T key) {
         return false;
     }
 }

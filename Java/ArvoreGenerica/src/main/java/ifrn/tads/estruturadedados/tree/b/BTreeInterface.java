@@ -8,11 +8,11 @@ interface BTreeInterface<T extends Comparable<T>> {
 
     BTreeNodeInterface<T> root(BTreeNodeInterface<T> node);
 
-    void insert(List<T> elementsToAdd);
+    void add(List<T> keys);
 
-    BTreeNodeInterface<T> insert(T targetData);
+    BTreeNodeInterface<T> add(T key);
 
-    BTreeNodeInterface<T> find(T targetData);
+    BTreeNodeInterface<T> find(T key);
 
-    boolean delete(T data);
+    boolean remove(T key);
 }
