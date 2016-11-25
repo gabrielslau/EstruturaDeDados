@@ -231,8 +231,130 @@ class RedBlackTree<T extends Comparable<T>> implements RedBlackTreeInterface<T> 
         displayInOrder(root.right());
     }
 
+    /**
+     * @param nodeToDelete node to delete
+     * @return the smallest node of the right child of the node which is about to be deleted
+     */
+    public RedBlackTreeNode<T> findSuccessor(RedBlackTreeNodeInterface<T> nodeToDelete) {
+        RedBlackTreeNode<T> successor = null;
+        RedBlackTreeNode<T> current = (RedBlackTreeNode<T>) nodeToDelete.right();
+
+        while (current != null) {
+            successor = current;
+            current = current.left();
+        }
+
+        return successor;
+    }
+
+    /**
+     * Case 1: if node to be deleted is a leaf node
+     *
+     * @param nodeTarget
+     */
+    public void handleCase1ForBinarySearchTreeDelete(RedBlackTreeNodeInterface<T> nodeTarget) {
+        if (nodeTarget.numberOfChildren() == 0) {
+            if (nodeTarget == root) {
+                root = null;
+            } else if (nodeTarget.isLeftChild()) {
+                nodeTarget.parent().left(null);
+            } else {
+                nodeTarget.parent().right(null);
+            }
+        } else {
+            handleCase2ForBinarySearchTreeDelete(nodeTarget);
+        }
+    }
+
+    /**
+     * Case 2: if node to be deleted has only one child
+     *
+     * @param nodeTarget
+     */
+    public void handleCase2ForBinarySearchTreeDelete(RedBlackTreeNodeInterface<T> nodeTarget) {
+        if (nodeTarget.numberOfChildren() == 1) {
+            if (nodeTarget.hasLeftChild()) {
+                nodeTarget.left().parent(nodeTarget.parent());
+
+                handleCase2ForDelete(nodeTarget, nodeTarget.left());
+
+                if (nodeTarget.isLeftChild()) {
+                    nodeTarget.parent().left(nodeTarget.left());
+                } else {
+                    nodeTarget.parent().right(nodeTarget.left());
+                }
+            } else {
+                nodeTarget.right().parent(nodeTarget.parent());
+
+                handleCase2ForDelete(nodeTarget, nodeTarget.right());
+
+                if (nodeTarget.isLeftChild()) {
+                    nodeTarget.parent().left(nodeTarget.right());
+                } else {
+                    nodeTarget.parent().right(nodeTarget.right());
+                }
+            }
+        } else {
+            handleCase3ForBinarySearchTreeDelete(nodeTarget);
+        }
+    }
+
+    /**
+     * Case 3: if node to be deleted has two children
+     *
+     * @param nodeTarget
+     */
+    public void handleCase3ForBinarySearchTreeDelete(RedBlackTreeNodeInterface<T> nodeTarget) {
+        RedBlackTreeNode<T> nodeSuccessor = findSuccessor(nodeTarget);
+
+        if (nodeTarget == root) {
+            root = nodeSuccessor;
+        } else if (nodeTarget.isLeftChild()) {
+            nodeTarget.parent().left(nodeSuccessor);
+        } else {
+            nodeTarget.parent().right(nodeSuccessor);
+        }
+
+        if (nodeSuccessor.isLeftChild()) {
+            nodeSuccessor.parent().left(null);
+        } else {
+            nodeSuccessor.parent().right(null);
+        }
+
+        nodeSuccessor.left(nodeTarget.left());
+        nodeSuccessor.right(nodeTarget.right());
+        nodeSuccessor.parent(nodeTarget.parent());
+
+        if (nodeTarget.hasLeftChild()) {
+            nodeSuccessor.left().parent(nodeSuccessor);
+        }
+
+        if (nodeTarget.hasRightChild()) {
+            nodeSuccessor.right().parent(nodeSuccessor);
+        }
+
+        nodeSuccessor.parent(nodeTarget.parent());
+    }
+
+    /**
+     * Simple Case (2): If either nodeTarget or successor is red
+     *
+     * @param nodeTarget the node to be deleted
+     * @param successor the node to replace the node deleted
+     */
+    public void handleCase2ForDelete(RedBlackTreeNodeInterface<T> nodeTarget, RedBlackTreeNodeInterface<T> successor) {
+        if (nodeTarget.isRed() || successor.isRed()) {
+            successor.black();
+        }
+    }
+
     public boolean delete(T data) {
-        // TODO
+        RedBlackTreeNode<T> node = find(data);
+
+        if (node == null) return false;
+
+        handleCase1ForBinarySearchTreeDelete(node);
+
         return false;
     }
 }

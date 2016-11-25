@@ -164,4 +164,23 @@ public class RedBlackTreeTest extends TestCase {
         tree.insert(Arrays.asList(41, 80));
         assertEquals(3, tree.getHeight(tree.root()));
     }
+
+    public void testDeleteNodeAndAssertCaseTwo() {
+        tree.insert(Arrays.asList(30, 20, 40, 10));
+
+        tree.delete(20);
+
+        RedBlackTreeNode<Integer> node = tree.find(30);
+
+        assertNotNull(node);
+
+        // Assert Data
+        assertEquals(new Integer(10), node.left().data());
+        assertEquals(new Integer(40), node.right().data());
+
+        // Assert Colors
+        assertTrue(node.isBlack());
+        assertTrue(node.left().isBlack());
+        assertTrue(node.right().isBlack());
+    }
 }
