@@ -10,7 +10,7 @@ interface BTreeInterface<T extends Comparable<T>> {
 
     void add(List<T> keys);
 
-    BTreeNodeInterface<T> add(T key);
+    void add(T key);
 
     BTreeNodeInterface<T> find(T key);
 
