@@ -1,6 +1,6 @@
 package ifrn.tads.estruturadedados.graph;
 
-public class Vertice implements InterfaceVertices {
+public class Vertex implements VertexInterface {
     private int chave;
     private double valor;
 
@@ -8,7 +8,7 @@ public class Vertice implements InterfaceVertices {
      * @param chave
      * @param valor
      */
-    public Vertice(int chave, double valor) {
+    public Vertex(int chave, double valor) {
         super();
         this.chave = chave;
         this.valor = valor;
@@ -17,29 +17,29 @@ public class Vertice implements InterfaceVertices {
     /**
      * @return the chave
      */
-    public int getChave() {
+    public int getKey() {
         return chave;
     }
 
     /**
-     * @param chave the chave to set
+     * @param key the chave to set
      */
-    public void setChave(int chave) {
-        this.chave = chave;
+    public void setKey(int key) {
+        this.chave = key;
     }
 
     /**
      * @return the valor
      */
-    public double getValor() {
+    public double getLabel() {
         return valor;
     }
 
     /**
-     * @param valor the valor to set
+     * @param label the valor to set
      */
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setLabel(double label) {
+        this.valor = label;
     }
 
     public String toString() {
