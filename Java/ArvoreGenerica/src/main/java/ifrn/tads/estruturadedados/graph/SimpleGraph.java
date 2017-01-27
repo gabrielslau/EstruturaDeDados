@@ -18,15 +18,15 @@ public class SimpleGraph implements SimpleGraphInterface {
         adjacencyMatrix = new Edge[adjacency_matrix_size][adjacency_matrix_size];
     }
 
-    public void addVertex(List<Double> labels) {
-        for (double label : labels) {
-            addVertex(label);
+    public void addVertex(List<Double> distances) {
+        for (double distance : distances) {
+            addVertex(distance);
         }
     }
 
-    public Vertex addVertex(double label) {
+    public Vertex addVertex(double distance) {
         int key = vertices.size() + 1;
-        return addVertex(new Vertex(key, label));
+        return addVertex(new Vertex(key, distance));
     }
 
     /**
@@ -73,8 +73,8 @@ public class SimpleGraph implements SimpleGraphInterface {
         adjacencyMatrix[indexFrom][indexTo] = edge;
     }
 
-    public Edge addEdge(Vertex vertexFrom, Vertex vertexTo, double label) {
-        Edge edge = new Edge(vertexFrom, vertexTo, label);
+    public Edge addEdge(Vertex vertexFrom, Vertex vertexTo, double distance) {
+        Edge edge = new Edge(vertexFrom, vertexTo, distance);
 
         int indexFrom = findIndex(vertexFrom.getKey());
         int indexTo = findIndex(vertexTo.getKey());
@@ -98,8 +98,8 @@ public class SimpleGraph implements SimpleGraphInterface {
         adjacencyMatrix[indexFrom][indexTo] = adjacencyMatrix[indexTo][indexFrom] = null;
     }
 
-    public Edge addArc(Vertex vertexFrom, Vertex vertexTo, double label) {
-        Edge arc = new Edge(vertexFrom, vertexTo, label, true);
+    public Edge addArc(Vertex vertexFrom, Vertex vertexTo, double distance) {
+        Edge arc = new Edge(vertexFrom, vertexTo, distance, true);
 
         int indexFrom = findIndex(vertexFrom.getKey());
         int indexTo = findIndex(vertexTo.getKey());

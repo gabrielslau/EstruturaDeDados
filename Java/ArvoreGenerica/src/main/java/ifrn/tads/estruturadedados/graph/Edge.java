@@ -3,7 +3,7 @@ package ifrn.tads.estruturadedados.graph;
 public class Edge implements EdgeInterface {
     private Vertex vertexFrom;
     private Vertex vertexTo;
-    private double label;
+    private double distance;
     private boolean directed;
 
     public Edge(Vertex vertexFrom, Vertex vertexTo) {
@@ -14,13 +14,13 @@ public class Edge implements EdgeInterface {
         makeUndirected();
     }
 
-    public Edge(Vertex vertexFrom, Vertex vertexTo, double label) {
+    public Edge(Vertex vertexFrom, Vertex vertexTo, double distance) {
         this(vertexFrom, vertexTo);
-        this.label = label;
+        this.distance = distance;
     }
 
-    public Edge(Vertex vertexFrom, Vertex vertexTo, double label, boolean directed) {
-        this(vertexFrom, vertexTo, label);
+    public Edge(Vertex vertexFrom, Vertex vertexTo, double distance, boolean directed) {
+        this(vertexFrom, vertexTo, distance);
         this.directed = directed;
     }
 
@@ -68,25 +68,24 @@ public class Edge implements EdgeInterface {
     }
 
     /**
-     * @return the label
+     * @return the distance
      */
-    public double getLabel() {
-        return label;
+    public double getDistance() {
+        return distance;
     }
 
     /**
-     * @param label the label to set
+     * @param distance the distance to set
      */
-    public void setLabel(double label) {
-        this.label = label;
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     /**
      * @return the verticeX
      */
     public String toString() {
-        //return "["+vertexFrom+"-"+vertexTo+":"+label+"]";
-        return "[" + label + "]";
+        return "[" + distance + "]";
     }
 
 }
