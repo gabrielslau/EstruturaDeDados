@@ -9,28 +9,28 @@ public interface SimpleGraphInterface {
     void removeVertex(Vertex vertex);
 
     Edge addEdge(Vertex vertexFrom, Vertex vertexTo,
-                 double valor);
+                 int distance);
 
     Edge addEdge(Vertex vertexFrom, Vertex vertexTo);
 
     void removeEdge(Edge edge);
 
     Edge addArc(Vertex vertexFrom, Vertex vertexTo,
-                double label);
+                int distance);
 
     Edge addArc(Vertex vertexFrom, Vertex vertexTo);
 
     void removeArc(Edge edge);
 
-    int degree(Vertex vertex);
+    int degree(Vertex vertex) throws InvalidPositionException;
 
     int order();
 
-    Vector vertices();
+    Vector<Vertex> vertices();
 
-    Vector edges();
+    Vector<Edge> edges();
 
-    Vector incidentEdges(Vertex vertex);
+    Vector incidentEdges(Vertex vertex) throws InvalidPositionException;
 
     Vector finalVertices(Edge edge);
 

@@ -12,10 +12,10 @@ public interface VertexInterface {
     /**
      * @return the label
      */
-    double getLabel();
+    Object getLabel();
 
     /**
      * @param label the valor to set
      */
-    void setLabel(double label);
+    void setLabel(Object label);
 }

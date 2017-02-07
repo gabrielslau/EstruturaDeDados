@@ -35,15 +35,15 @@ public class SimpleGraphTest {
 
     @Test
     public void testInsertVertexes() {
-        graph.addVertex(Arrays.asList(1.0, 3.0, 5.0, 6.0, 10.0));
+        graph.addVertex(Arrays.asList(1, 3, 5, 6, 10));
 
         assertEquals(5, graph.vertices().size());
     }
 
     @Test
     public void testInsertEdge() {
-        Vertex vertexA = graph.addVertex(1.0);
-        Vertex vertexB = graph.addVertex(2.0);
+        Vertex vertexA = graph.addVertex(1);
+        Vertex vertexB = graph.addVertex(2);
 
         Edge edge = graph.addEdge(vertexA, vertexB);
 

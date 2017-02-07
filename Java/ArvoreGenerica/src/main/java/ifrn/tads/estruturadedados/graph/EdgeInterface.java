@@ -39,10 +39,10 @@ public interface EdgeInterface {
     /**
      * @return the label
      */
-    double getDistance();
+    int getDistance();
 
     /**
      * @param distance the distance to set
      */
-    void setDistance(double distance);
+    void setDistance(int distance);
 }

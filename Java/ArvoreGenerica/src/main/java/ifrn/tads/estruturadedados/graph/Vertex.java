@@ -1,49 +1,44 @@
 package ifrn.tads.estruturadedados.graph;
 
 public class Vertex implements VertexInterface {
-    private int chave;
-    private double valor;
+    private int key;
+    private Object label;
 
     /**
-     * @param chave
-     * @param valor
+     * All initial distances are unknown
      */
-    public Vertex(int chave, double valor) {
+    public Integer shortestDistance = Integer.MAX_VALUE;
+
+    /**
+     * The vertex previous visited vertex
+     */
+    private Vertex previous;
+
+    public Vertex(int key, Object label) {
         super();
-        this.chave = chave;
-        this.valor = valor;
+        this.key = key;
+        this.label = label;
+        this.previous = null;
     }
 
-    /**
-     * @return the chave
-     */
     public int getKey() {
-        return chave;
+        return key;
     }
 
-    /**
-     * @param key the chave to set
-     */
     public void setKey(int key) {
-        this.chave = key;
+        this.key = key;
     }
 
-    /**
-     * @return the valor
-     */
-    public double getLabel() {
-        return valor;
+    public Object getLabel() {
+        return label;
     }
 
-    /**
-     * @param label the valor to set
-     */
-    public void setLabel(double label) {
-        this.valor = label;
+    public void setLabel(Object label) {
+        this.label = label;
     }
 
     public String toString() {
         //return "["+chave+" - "+valor+"]";
-        return "[" + chave + "]";
+        return "[" + label + "]";
     }
 }

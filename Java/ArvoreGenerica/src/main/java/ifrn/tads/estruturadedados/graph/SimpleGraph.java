@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class SimpleGraph implements SimpleGraphInterface {
-    private final int ADJACENCY_MATRIX_SIZE = 10;
+    private int ADJACENCY_MATRIX_SIZE = 10;
     private Vector<Vertex> vertices;
     private Edge adjacencyMatrix[][];
 
@@ -14,19 +14,30 @@ public class SimpleGraph implements SimpleGraphInterface {
     }
 
     public SimpleGraph(int adjacency_matrix_size) {
+        ADJACENCY_MATRIX_SIZE = adjacency_matrix_size;
+
         vertices = new Vector<Vertex>();
         adjacencyMatrix = new Edge[adjacency_matrix_size][adjacency_matrix_size];
     }
 
-    public void addVertex(List<Double> distances) {
-        for (double distance : distances) {
-            addVertex(distance);
+    public int getMatrixSize() {
+        return ADJACENCY_MATRIX_SIZE;
+    }
+
+    public void addVertex(List<Integer> labels) {
+        for (int label : labels) {
+            addVertex(label);
         }
     }
 
-    public Vertex addVertex(double distance) {
+    public Vertex addVertex(int distance) {
         int key = vertices.size() + 1;
         return addVertex(new Vertex(key, distance));
+    }
+
+    public Vertex addVertex(String label) {
+        int key = vertices.size() + 1;
+        return addVertex(new Vertex(key, label));
     }
 
     /**
@@ -73,13 +84,13 @@ public class SimpleGraph implements SimpleGraphInterface {
         adjacencyMatrix[indexFrom][indexTo] = edge;
     }
 
-    public Edge addEdge(Vertex vertexFrom, Vertex vertexTo, double distance) {
+    public Edge addEdge(Vertex vertexFrom, Vertex vertexTo, int distance) {
         Edge edge = new Edge(vertexFrom, vertexTo, distance);
 
         int indexFrom = findIndex(vertexFrom.getKey());
         int indexTo = findIndex(vertexTo.getKey());
 
-        // grafo nao orientado
+        // grafo nao orientado (undirected)
         insertAdjacencyMatrix(indexFrom, indexTo, edge);
         insertAdjacencyMatrix(indexTo, indexFrom, edge);
 
@@ -94,17 +105,17 @@ public class SimpleGraph implements SimpleGraphInterface {
         int indexFrom = findIndex(edge.getVertexFrom().getKey());
         int indexTo = findIndex(edge.getVertexTo().getKey());
 
-        // grafo nao orientado
+        // grafo nao orientado (undirected)
         adjacencyMatrix[indexFrom][indexTo] = adjacencyMatrix[indexTo][indexFrom] = null;
     }
 
-    public Edge addArc(Vertex vertexFrom, Vertex vertexTo, double distance) {
+    public Edge addArc(Vertex vertexFrom, Vertex vertexTo, int distance) {
         Edge arc = new Edge(vertexFrom, vertexTo, distance, true);
 
         int indexFrom = findIndex(vertexFrom.getKey());
         int indexTo = findIndex(vertexTo.getKey());
 
-        // grafo orientado
+        // grafo orientado (directed)
         insertAdjacencyMatrix(indexFrom, indexTo, arc);
 
         return arc;
@@ -124,7 +135,7 @@ public class SimpleGraph implements SimpleGraphInterface {
         int indexFrom = findIndex(edge.getVertexFrom().getKey());
         int indexTo = findIndex(edge.getVertexTo().getKey());
 
-        // grafo orientado
+        // grafo orientado (directed)
         adjacencyMatrix[indexFrom][indexTo] = null;
     }
 
@@ -179,11 +190,11 @@ public class SimpleGraph implements SimpleGraphInterface {
     // TODO: implementar algoritmo para verificar existencia de caminho euleriano
     // vale 0,5 pontos
 
-    public Vector vertices() {
+    public Vector<Vertex> vertices() {
         return vertices;
     }
 
-    public Vector edges() {
+    public Vector<Edge> edges() {
         Vector<Edge> vector = new Vector<Edge>();
         for (int l = 0; l < getVertexCount(); l++) {
             for (int c = 0; c < getVertexCount(); c++) {
