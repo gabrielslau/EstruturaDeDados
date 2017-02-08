@@ -71,6 +71,26 @@ public class SimpleGraphTest {
     }
 
     @Test
+    public void testIncidentEdgesOfDirectedEdges() {
+        Vertex vertexA = graph.addVertex("A");
+        Vertex vertexB = graph.addVertex("B");
+        Vertex vertexC = graph.addVertex("C");
+        Vertex vertexD = graph.addVertex("D");
+
+        Edge edgeAB = graph.addArc(vertexA, vertexB, 10);
+        Edge edgeBC = graph.addArc(vertexB, vertexC, 20);
+        Edge edgeCD = graph.addArc(vertexC, vertexD, 30);
+        Edge edgeDA = graph.addArc(vertexD, vertexA, 40);
+        Edge edgeDB = graph.addArc(vertexD, vertexB, 50);
+
+        Vector edges = graph.incidentEdges(vertexD);
+        Vector expected = new Vector<Edge>(Arrays.asList(edgeDA, edgeDB));
+
+        assertEquals(expected, edges);
+        assertEquals(2, edges.size());
+    }
+
+    @Test
     public void testVertexDegree() {
         Vertex vertexA = graph.addVertex(1);
         Vertex vertexB = graph.addVertex(2);

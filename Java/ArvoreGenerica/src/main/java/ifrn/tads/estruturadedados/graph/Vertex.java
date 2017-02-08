@@ -1,6 +1,6 @@
 package ifrn.tads.estruturadedados.graph;
 
-public class Vertex implements VertexInterface {
+public class Vertex implements VertexInterface, Comparable<Vertex> {
     private int key;
     private Object label;
 
@@ -38,7 +38,21 @@ public class Vertex implements VertexInterface {
     }
 
     public String toString() {
-        //return "["+chave+" - "+valor+"]";
-        return "[" + label + "]";
+        String previousVertex = getPrevious() != null ? getPrevious().getLabel().toString() : "-";
+        String distance = this.shortestDistance != Integer.MAX_VALUE ? this.shortestDistance.toString() : "∞";
+
+        return "[" + label + ", " + distance + ", " + previousVertex + "]";
+    }
+
+    public Vertex getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Vertex previous) {
+        this.previous = previous;
+    }
+
+    public int compareTo(Vertex vertex) {
+        return Integer.compare(shortestDistance, vertex.shortestDistance);
     }
 }

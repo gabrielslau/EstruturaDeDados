@@ -2,6 +2,7 @@ package ifrn.tads.estruturadedados.graph;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Vector;
 
 public class SimpleGraph implements SimpleGraphInterface {
@@ -210,23 +211,64 @@ public class SimpleGraph implements SimpleGraphInterface {
      * @return Vector lista de edges encontradas
      * @exercicio
      */
-    public Vector incidentEdges(Vertex vertex) {
+    public Vector<Edge> incidentEdges(Vertex vertex) {
+        return incidentEdges(vertex, new PriorityQueue<Vertex>());
+    }
+
+    public Vector<Edge> incidentEdges(Vertex vertex, PriorityQueue<Vertex> visitedVertices) {
         Vector<Edge> edges = new Vector<Edge>();
         int vertexIndex = findIndex(vertex.getKey());
 
-        for (int f = 0; f < getVertexCount(); f++) {
-            for (int g = 0; g < getVertexCount(); g++) {
-                if (
-                        (f == vertexIndex || g == vertexIndex) &&
-                                adjacencyMatrix[f][g] != null &&
-                                !edges.contains(adjacencyMatrix[f][g])
-                        ) {
-                    edges.add(adjacencyMatrix[f][g]);
+        for (int originIndex = 0; originIndex < getVertexCount(); originIndex++) {
+            for (int destinationIndex = 0; destinationIndex < getVertexCount(); destinationIndex++) {
+                Edge currentEdge = this.adjacencyMatrix[originIndex][destinationIndex];
+                boolean isIncident = this.isIncitent(vertexIndex, originIndex, destinationIndex);
+
+                if (currentEdge != null && isIncident) {
+                    boolean isDirected = this.isDirected(originIndex, destinationIndex);
+                    boolean isComingOut = originIndex == vertexIndex;
+                    boolean isAdded = edges.contains(currentEdge);
+                    boolean isVisited = false;
+
+                    try {
+                        isVisited = visitedVertices.contains(this.opposite(vertex, currentEdge));
+                    } catch (InvalidPositionException e) {
+                        // do nothing
+                    }
+
+                    if (isDirected) {
+                        if (isComingOut && !isVisited) {
+                            edges.add(currentEdge);
+                        }
+                    } else if (!isAdded && !isVisited) {
+                        edges.add(currentEdge);
+                    }
                 }
             }
         }
 
         return edges;
+    }
+
+    /**
+     * @param vertexIndex      the index of the vertex to check the incidence
+     * @param originIndex      the index of the origin vertex in the adjacence matrix
+     * @param destinationIndex the index of the destination vertex in the adjacence matrix
+     * @return boolean
+     */
+    public boolean isIncitent(int vertexIndex, int originIndex, int destinationIndex) {
+        return originIndex == vertexIndex || destinationIndex == vertexIndex;
+    }
+
+    /**
+     * Checks if the edge is directed or undirected
+     *
+     * @param originIndex
+     * @param destinationIndex
+     * @return the type of the edge
+     */
+    public boolean isDirected(int originIndex, int destinationIndex) {
+        return adjacencyMatrix[originIndex][destinationIndex] != null && adjacencyMatrix[destinationIndex][originIndex] == null;
     }
 
     public Vector finalVertices(Edge edge) {
