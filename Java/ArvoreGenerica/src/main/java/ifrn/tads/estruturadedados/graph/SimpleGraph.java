@@ -310,4 +310,10 @@ public class SimpleGraph implements SimpleGraphInterface {
 
         return (adjacencyMatrix[indexA][indexB]);
     }
+
+    public void resetShortestPaths() {
+        for (Vertex vertex : vertices()) {
+            vertex.reset();
+        }
+    }
 }

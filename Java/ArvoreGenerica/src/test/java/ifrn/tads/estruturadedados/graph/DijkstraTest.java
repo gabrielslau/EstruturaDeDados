@@ -112,4 +112,46 @@ public class DijkstraTest {
         System.out.println("\n\nPATH FROM A TO C\n---");
         System.out.println(path);
     }
+
+    @Test
+    public void testShortestPathAmbulance() throws InvalidPositionException {
+        Vertex vertexA = graph.addVertex("A");
+        Vertex vertexB = graph.addVertex("B");
+        Vertex vertexC = graph.addVertex("C");
+        Vertex vertexD = graph.addVertex("D");
+        Vertex vertexE = graph.addVertex("E");
+        Vertex vertexF = graph.addVertex("F");
+
+        graph.addEdge(vertexA, vertexB, 2);
+        graph.addEdge(vertexA, vertexD, 3);
+        graph.addEdge(vertexB, vertexC, 1);
+        graph.addEdge(vertexB, vertexE, 3);
+        graph.addEdge(vertexD, vertexB, 4);
+        graph.addEdge(vertexD, vertexE, 2);
+        graph.addEdge(vertexD, vertexF, 2);
+        graph.addEdge(vertexF, vertexE, 1);
+        graph.addEdge(vertexE, vertexC, 2);
+
+        int shortestDistance = Integer.MAX_VALUE;
+        for (Vertex originVertex : graph.vertices()) {
+            graph.resetShortestPaths();
+
+            dijkstra = new Dijkstra(graph, originVertex);
+            int totalCost = 0;
+            for (Vertex vertex : graph.vertices()) {
+                totalCost += vertex.shortestDistance;
+            }
+
+            if (totalCost < shortestDistance) {
+                shortestDistance = totalCost;
+            }
+
+            System.out.println("\n\nPath from " + originVertex.getLabel() + ": " + totalCost + "\n---");
+            for (Vertex vertex : graph.vertices()) {
+                System.out.println(vertex);
+            }
+        }
+
+        System.out.println("\n\nShortest distance: " + shortestDistance);
+    }
 }

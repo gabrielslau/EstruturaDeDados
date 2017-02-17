@@ -7,7 +7,7 @@ public class Vertex implements VertexInterface, Comparable<Vertex> {
     /**
      * All initial distances are unknown
      */
-    public Integer shortestDistance = Integer.MAX_VALUE;
+    public Integer shortestDistance;
 
     /**
      * The vertex previous visited vertex
@@ -16,9 +16,14 @@ public class Vertex implements VertexInterface, Comparable<Vertex> {
 
     public Vertex(int key, Object label) {
         super();
+        this.reset();
         this.key = key;
         this.label = label;
+    }
+
+    public void reset() {
         this.previous = null;
+        this.shortestDistance = Integer.MAX_VALUE;
     }
 
     public int getKey() {
@@ -41,7 +46,7 @@ public class Vertex implements VertexInterface, Comparable<Vertex> {
         String previousVertex = getPrevious() != null ? getPrevious().getLabel().toString() : "-";
         String distance = this.shortestDistance != Integer.MAX_VALUE ? this.shortestDistance.toString() : "∞";
 
-        return "[" + label + ", " + distance + ", " + previousVertex + "]";
+        return label + "(" + distance + "): " + previousVertex;
     }
 
     public Vertex getPrevious() {
@@ -53,6 +58,6 @@ public class Vertex implements VertexInterface, Comparable<Vertex> {
     }
 
     public int compareTo(Vertex vertex) {
-        return Integer.compare(shortestDistance, vertex.shortestDistance);
+        return this.shortestDistance.compareTo(vertex.shortestDistance);
     }
 }
